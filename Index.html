@@ -1,0 +1,106 @@
+DOCTYPE html>
+<html>
+<head>
+<title>AI Quiz Game</title>
+
+<style>
+body {
+    text-align:center;
+    background:#111;
+    color:white;
+    font-family:Arial;
+}
+
+img {
+    width:140px;
+    margin:10px;
+    border-radius:10px;
+}
+
+button {
+    padding:10px;
+    margin:5px;
+    background:#444;
+    color:white;
+    border:none;
+}
+
+button:hover {
+    background:#666;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Guess the AI Tool 🔥</h2>
+<h3 id="score"></h3>
+<div id="quiz"></div>
+
+<script>
+
+let score = 0;
+let current = 0;
+
+let questions = [
+
+{images:["https://upload.wikimedia.org/wikipedia/commons/6/6e/Gnome-fs-home.svg","https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"],answer:"Quilbot"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg","https://upload.wikimedia.org/wikipedia/commons/5/5a/Running_woman.jpg"],answer:"Runway ML"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG","https://upload.wikimedia.org/wikipedia/commons/4/4f/Headphones_1.jpg"],answer:"Soundraw"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/9/99/Starry_Night_Sky.jpg","https://upload.wikimedia.org/wikipedia/commons/1/17/Artificial_intelligence_icon.png"],answer:"Starry AI"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/8/89/Movie_clapperboard.jpg","https://upload.wikimedia.org/wikipedia/commons/0/0d/Baseball_cap.jpg"],answer:"CapCut"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/3/3b/App_Store_iOS.svg","https://upload.wikimedia.org/wikipedia/commons/9/99/Beautiful_face.jpg"],answer:"FaceApp"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/6/6e/Gnome-fs-home.svg","https://upload.wikimedia.org/wikipedia/commons/4/4b/Indian_cuisine.jpg"],answer:"Chatbot"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/1/17/Artificial_intelligence_icon.png","https://upload.wikimedia.org/wikipedia/commons/3/3f/Camera_icon.png"],answer:"Lensa AI"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/5/59/Mobile_phone_icon.png","https://upload.wikimedia.org/wikipedia/commons/3/3a/Editing_video.jpg"],answer:"CapCut"},
+{images:["https://upload.wikimedia.org/wikipedia/commons/0/0b/Music_icon.png","https://upload.wikimedia.org/wikipedia/commons/4/4f/Headphones_1.jpg"],answer:"Soundraw"}
+
+];
+
+function loadQuestion() {
+
+let q = questions[current];
+let html = "";
+
+q.images.forEach(img => {
+html += `<img src="${img}">`;
+});
+
+let options = ["Quilbot","Runway ML","Soundraw","FaceApp","Starry AI","CapCut","Chatbot","Lensa AI"];
+options.sort(() => Math.random() - 0.5);
+
+options.forEach(opt => {
+html += `<br><button onclick="check('${opt}')">${opt}</button>`;
+});
+
+document.getElementById("quiz").innerHTML = html;
+document.getElementById("score").innerText =
+"Question " + (current+1) + " / 10 | Score: " + score;
+}
+
+function check(ans) {
+
+if(ans === questions[current].answer){
+score++;
+alert("Correct 🎉");
+}else{
+alert("Wrong ❌");
+}
+
+current++;
+
+if(current < questions.length){
+loadQuestion();
+}else{
+document.getElementById("quiz").innerHTML =
+"<h2>Game Over 🎯<br>Your Score: "+score+"/10</h2>";
+}
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
